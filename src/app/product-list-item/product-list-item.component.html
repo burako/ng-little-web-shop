@@ -1,1 +1,7 @@
-<p>product-list-item works!</p>
+<div class="product-container">
+    <h2>{{productItem.name}}</h2>
+    <img class="product-image" src="{{productItem.url}}">
+    <p>{{productItem.description}}</p>
+    <p>{{productItem.price | currency: 'USD': true}}</p>
+
+</div>
