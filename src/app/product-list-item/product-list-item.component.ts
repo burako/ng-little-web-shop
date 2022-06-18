@@ -9,12 +9,19 @@ import { Product } from '../models/product';
 export class ProductListItemComponent implements OnInit {
 
   @Input() productItem: Product;
+  quantity: number = 0;
 
   constructor() { 
     this.productItem = new Product();
   }
 
   ngOnInit(): void {
+  }
+
+  onSubmit() {
+    console.log('ProductListItemComponent: onSubmit()');
+    alert(this.quantity + ' ' + this.productItem.name + 's added to the cart');
+    this.quantity = 0;
   }
 
 }
