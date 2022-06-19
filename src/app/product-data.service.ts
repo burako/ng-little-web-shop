@@ -9,7 +9,7 @@ import { CartItem } from './models/cartItem';
 })
 export class ProductDataService {
 
-
+  products: Product[] = [];
   shoppingCart: CartItem[] = [];
 
   constructor(private http:HttpClient) { 
@@ -18,6 +18,7 @@ export class ProductDataService {
   addToCart(product: Product, quantity: number): void{
     let cartItem: CartItem = new CartItem(product, quantity);
     let added: boolean = false;
+    
 
     this.shoppingCart.forEach(item => {
       if(item.product.id === cartItem.product.id){
@@ -36,5 +37,10 @@ export class ProductDataService {
 
   getAllProducts():Observable<Product[]>{
     return this.http.get<Product[]>('/assets/data.json');
+  }
+
+  //this doesn't work. returns undefined or sth like that when called from product detail component.
+  getProductById(id: number): Product {
+    return this.products.filter(product => product.id === id)[0];
   }
 }
