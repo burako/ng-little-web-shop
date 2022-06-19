@@ -5,6 +5,7 @@
     <p>{{productItem.price | currency: 'USD': true}}</p>
     <form #form="ngForm" (ngSubmit)="onSubmit()">
         <input type="number" class="select-input" name="quantity" [(ngModel)]="quantity" min="1">
+        <br>
         <input type="submit" class="btn btn-primary" [disabled]="form.invalid" value="Add to Cart">
     </form>
 </div>

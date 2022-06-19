@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../models/product';
+import { ProductDataService } from '../product-data.service';
 
 @Component({
   selector: 'app-product-list-item',
@@ -11,7 +12,7 @@ export class ProductListItemComponent implements OnInit {
   @Input() productItem: Product;
   quantity: number = 0;
 
-  constructor() { 
+  constructor(private productService: ProductDataService) { 
     this.productItem = new Product();
   }
 
@@ -19,7 +20,7 @@ export class ProductListItemComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('ProductListItemComponent: onSubmit()');
+    this.productService.addToCart(this.productItem, this.quantity);
     alert(this.quantity + ' ' + this.productItem.name + 's added to the cart');
     this.quantity = 0;
   }

@@ -1,1 +1,9 @@
-<p>cart works!</p>
+<h1> Shopping Cart </h1>
+<ul>
+    <li *ngFor = "let item of shoppingCart">
+        <h2>{{item.product.name}}</h2>
+        <p>{{item.product.price}}</p>
+        <p>Quantity: {{item.quantity}}</p>
+    </li>
+</ul>
+<p>Total: {{cartTotal}}</p>
