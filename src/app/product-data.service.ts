@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Product } from './models/product';
 import { CartItem } from './models/cartItem';
 
@@ -39,8 +39,7 @@ export class ProductDataService {
     return this.http.get<Product[]>('/assets/data.json');
   }
 
-  //this doesn't work. returns undefined or sth like that when called from product detail component.
-  getProductById(id: number): Product {
-    return this.products.filter(product => product.id === id)[0];
+  getProductById(id: number): Observable<Product>{ 
+    return this.getAllProducts().pipe(map(products => products.find(product => product.id === id)));
   }
 }

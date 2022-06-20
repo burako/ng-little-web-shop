@@ -10,12 +10,12 @@ import { ProductDataService } from '../product-data.service';
 })
 export class ProductDetailComponent implements OnInit {
 
-  
+  products: Product[] = [];
   productId!: number;
-  product: Product;
+  selectedProduct: Product;
 
-  constructor(private route: ActivatedRoute,private productService: ProductDataService) { 
-    this.product = new Product();
+  constructor(private route: ActivatedRoute, private productService: ProductDataService) { 
+    this.selectedProduct = new Product();
   }
 
   ngOnInit(): void {
@@ -24,7 +24,9 @@ export class ProductDetailComponent implements OnInit {
     } );
 
     //this doesn't work. returns undefined or sth like that. check the service.
-    this.product = this.productService.getProductById(this.productId);
+    this.productService.getProductById(this.productId).subscribe(data => {
+      this.selectedProduct = data;
+    });
   }
 
 }
