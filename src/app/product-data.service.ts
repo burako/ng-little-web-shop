@@ -39,7 +39,7 @@ export class ProductDataService {
     return this.http.get<Product[]>('/assets/data.json');
   }
 
-  getProductById(id: number): Observable<Product>{ 
+  getProductById(id: number): Observable<Product | undefined>{ 
     return this.getAllProducts().pipe(map(products => products.find(product => product.id === id)));
   }
 }

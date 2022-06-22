@@ -1,5 +1,6 @@
 <p>{{productId}}</p>
-<p>{{selectedProduct.name}}</p>
-<p>{{selectedProduct.description}}</p>
-<p>{{selectedProduct.price}}</p>
-<img src="{{selectedProduct.url}}">
+<p>{{selectedProduct.id | async}}</p>
+<!-- <p>{{selectedProduct?.description}}</p>
+<p>{{selectedProduct?.price}}</p>
+<img *ngIf="selectedProduct" src="{{selectedProduct.url}}">
+ -->
