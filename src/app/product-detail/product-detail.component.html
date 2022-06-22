@@ -1,5 +1,15 @@
-
-<p>{{selectedProduct?.id}}</p>
-<p>{{selectedProduct?.description}}</p>
-<p>{{selectedProduct?.price}}</p>
-<img *ngIf="selectedProduct" src="{{selectedProduct.url}}">
+<div class="detail-container">
+    <img *ngIf="selectedProduct" src="{{selectedProduct.url}}">
+    <div class="detail-item">
+        <h2>{{selectedProduct?.name}}</h2>
+        <p>{{selectedProduct?.description}}</p>
+        <p>{{selectedProduct?.price | currency: 'USD': true}}</p>
+        <form #form="ngForm" (ngSubmit)="onSubmit()">
+            <input type="number" class="select-input" name="quantity" [(ngModel)]="quantity" min="1">
+            <br>
+            <input type="submit" class="btn btn-primary" [disabled]="form.invalid" value="Add to Cart">
+        </form>
+        <br>
+        <a class="back-link" routerLink="/"> &larr; Back to all products</a>
+    </div>
+</div>

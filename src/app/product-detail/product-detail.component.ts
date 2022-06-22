@@ -15,6 +15,7 @@ export class ProductDetailComponent implements OnInit {
   productId!: number;
   selectedProduct: Product | undefined;
   productDetail: Product | undefined;
+  quantity: number = 0;
 
   constructor(private route: ActivatedRoute, private productService: ProductDataService) { 
     //this.selectedProduct = new Observable<Product | undefined>();
@@ -31,6 +32,12 @@ export class ProductDetailComponent implements OnInit {
       this.selectedProduct = data;
       console.log(this.selectedProduct);
     });
+  }
+
+  onSubmit() {
+    this.productService.addToCart(this.selectedProduct!, this.quantity);
+    alert(this.quantity + ' ' + this.selectedProduct!.name + 's added to the cart');
+    this.quantity = 0;
   }
 
 }
