@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Order } from '../models/order';
 
 @Component({
   selector: 'app-confirmation',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfirmationComponent implements OnInit {
 
-  constructor() { }
+  orderData : Order;
+
+  constructor() { 
+    this.orderData = new Order('','',0);
+  }
 
   ngOnInit(): void {
+  }
+
+  getOrder(order: Order){
+    this.orderData.name = order.name;
+    this.orderData.address = order.address;
+    this.orderData.amount = order.amount
   }
 
 }

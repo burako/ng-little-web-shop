@@ -1,6 +1,6 @@
 <div class="cart-container">
-    <h3 *ngIf="shoppingCart.length==0" class="empty-cart-message">Your cart is empty</h3>
         <div class="cart-panel">
+            <h3 *ngIf="shoppingCart.length==0" class="empty-cart-message">Your cart is empty</h3>
             <div class="cart-item" *ngFor = "let item of shoppingCart">
                     <img src="{{item.product.url}}">
                 <div class="cart-item-details">       
@@ -15,10 +15,13 @@
         </div>
         <div>
             <form #paymentForm="ngForm" (ngSubmit)="checkout()" class="cart-item-details">
-                <input type="text" name="fullname" class="form-margin" placeholder="Your full name" required>
-                <input type="text" name="address" class="form-margin" placeholder="Your address" required>
-                <input type="number" name="card" class="form-margin" placeholder="Your card number" required>
-                <input type="submit" value="Make payment" class="btn btn-primary">
+                <label>*Full name</label>
+                <input type="text" name="fullname" class="form-margin" required minlength="3" placeholder="Minimum 3 characters" [(ngModel)]="fullName" #name="ngModel">
+                <label>*Address</label>
+                <input type="text" name="address" class="form-margin" required minlength="6" placeholder="Minimum 6 characters" [(ngModel)]="address" #address="ngModel">
+                <label>*Card number</label>
+                <input type="text" name="card" class="form-margin" required minlength="16" placeholder="16 digit card number">
+                <a routerLink="/confirmation"><input type="submit" [disabled]="paymentForm.invalid" value="Pay {{cartTotal | currency: 'USD': true}}" class="btn btn-primary form-margin"></a>
             </form>
         </div>
 </div>

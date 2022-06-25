@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
 import { ProductDataService } from '../product-data.service';
 import { CartItem } from '../models/cartItem';
 import { NgForm } from '@angular/forms';
+import { Order } from '../models/order';
 
 @Component({
   selector: 'app-cart',
@@ -12,6 +13,9 @@ export class CartComponent implements OnInit {
 
   shoppingCart: CartItem[] = [];
   cartTotal: number = 0;
+  fullName: string = '';
+  address: string = '';
+  @Output() newOrder: EventEmitter<Order> = new EventEmitter<Order>();
 
   constructor(private productService: ProductDataService) { }
 
@@ -41,6 +45,15 @@ export class CartComponent implements OnInit {
     return total;
   }
 
-  checkout(): void {}
+  checkout(): void {
+    //console.log("paid!")
+    const order: Order = {
+      name : this.fullName,
+      address : this.address,
+      amount : this.cartTotal
+    }
+    this.newOrder.emit(order);
+    //form is not disable here for some reason!
+  }
 
 }
