@@ -1,5 +1,7 @@
 .header {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     background: #e56934;
     color: #fff;
     padding: 12px;
@@ -13,8 +15,9 @@
   
   a {
     color: #ffffff;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: right;
-    
+  }
+
+  .navigation{
+    align-content:space-between;
+    padding-right: 50px;
   }
