@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Order } from '../models/order';
+import { ProductDataService } from '../product-data.service';
 
 @Component({
   selector: 'app-confirmation',
@@ -8,19 +9,16 @@ import { Order } from '../models/order';
 })
 export class ConfirmationComponent implements OnInit {
 
-  orderData : Order;
+  userName: string = '';
+  address: string = '';
+  amount: number = 0;
 
-  constructor() { 
-    this.orderData = new Order('','',0);
-  }
+  constructor(private productService: ProductDataService) {}
 
   ngOnInit(): void {
-  }
-
-  getOrder(order: Order){
-    this.orderData.name = order.name;
-    this.orderData.address = order.address;
-    this.orderData.amount = order.amount
+    this.userName = this.productService.lastOrder.name;
+    this.address = this.productService.lastOrder.address;
+    this.amount = this.productService.lastOrder.amount;
   }
 
 }

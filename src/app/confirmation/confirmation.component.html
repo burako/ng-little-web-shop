@@ -1,13 +1,12 @@
-<app-cart (newOrder)="getOrder($event)"></app-cart>
 <div class="confirmation-container">
     <div class="confirmation-header">
         <h3>Yay! We have received your order!</h3>
     </div>
     <div class="confirmation-items">
-        <p class="confirmation-item">Thank you {{this.orderData.name}}!</p>
-        <p class="confirmation-item">Your payment of {{this.orderData.amount | currency: 'USD': true}} was successful.</p>
+        <p class="confirmation-item">Thank you {{this.userName}}!</p>
+        <p class="confirmation-item">Your payment of {{this.amount | currency: 'USD': true}} was successful.</p>
         <p class="confirmation-item">We will ship your order to the address below in 1-3 days:</p>
-        <p class="confirmation-item">{{this.orderData.address}}</p>
+        <p class="confirmation-item">{{this.address}}</p>
     </div>
     <br>
         <a class="confirmation-item" class="back-link" routerLink="/"> &larr; Back to all products</a>

@@ -1,8 +1,9 @@
-import { Component, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { ProductDataService } from '../product-data.service';
 import { CartItem } from '../models/cartItem';
 import { NgForm } from '@angular/forms';
 import { Order } from '../models/order';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -14,10 +15,10 @@ export class CartComponent implements OnInit {
   shoppingCart: CartItem[] = [];
   cartTotal: number = 0;
   fullName: string = '';
-  address: string = '';
-  @Output() newOrder: EventEmitter<Order> = new EventEmitter<Order>();
+  shippingAddress: string = '';
+  cardNumber: string = '';
 
-  constructor(private productService: ProductDataService) { }
+  constructor(private productService: ProductDataService, private router: Router) { }
 
   ngOnInit(): void {
     this.shoppingCart = this.productService.getItemsInCart();
@@ -46,14 +47,14 @@ export class CartComponent implements OnInit {
   }
 
   checkout(): void {
-    //console.log("paid!")
     const order: Order = {
       name : this.fullName,
-      address : this.address,
+      address : this.shippingAddress,
       amount : this.cartTotal
     }
-    this.newOrder.emit(order);
-    //form is not disable here for some reason!
+    this.productService.createOrder(order);
+    this.productService.emptyCart();
+    this.router.navigateByUrl('/confirmation');
   }
 
 }
