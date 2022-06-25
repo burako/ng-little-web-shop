@@ -18,7 +18,6 @@ export class ProductDetailComponent implements OnInit {
   quantity: number = 0;
 
   constructor(private route: ActivatedRoute, private productService: ProductDataService) { 
-    //this.selectedProduct = new Observable<Product | undefined>();
     this.productDetail = new Product();
     this.selectedProduct = new Product();
   }

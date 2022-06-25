@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { filter, map, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Product } from './models/product';
 import { CartItem } from './models/cartItem';
 import { Order } from './models/order';
@@ -13,6 +14,7 @@ export class ProductDataService {
   products: Product[] = [];
   shoppingCart: CartItem[] = [];
   lastOrder!: Order;
+  public cartSize: BehaviorSubject<number> = new BehaviorSubject<number>(this.getNumberOfItemsInCart());
 
   constructor(private http:HttpClient) { 
   }
@@ -21,7 +23,6 @@ export class ProductDataService {
     let cartItem: CartItem = new CartItem(product, quantity);
     let added: boolean = false;
     
-
     this.shoppingCart.forEach(item => {
       if(item.product.id === cartItem.product.id){
         item.quantity += cartItem.quantity;
@@ -31,18 +32,29 @@ export class ProductDataService {
     if (!added) {
       this.shoppingCart.push(cartItem);
     }
+    this.cartSize.next(this.getNumberOfItemsInCart());
   }
 
   getNumberOfItemsInCart() : number {
-    return this.shoppingCart.length;
+    let amount: number = 0;
+    this.shoppingCart.forEach(item =>{
+      amount += item.quantity;
+    })
+    return amount;
   }
 
   getItemsInCart(): CartItem[] {
     return this.shoppingCart;
   }
 
+  setCart(updatedCart: CartItem[]): void {
+    this.shoppingCart = updatedCart;
+    this.cartSize.next(this.getNumberOfItemsInCart());
+  }
+
   emptyCart(): void {
     this.shoppingCart = [];
+    this.cartSize.next(this.getNumberOfItemsInCart());
   }
 
   getAllProducts():Observable<Product[]>{

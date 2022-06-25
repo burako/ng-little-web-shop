@@ -35,6 +35,7 @@ export class CartComponent implements OnInit {
       updatedItem!.quantity = item.quantity;
     }
     this.cartTotal = this.totalPrice();
+    this.productService.setCart(this.shoppingCart);
   }
 
   totalPrice(): number {

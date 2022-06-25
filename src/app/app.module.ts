@@ -12,6 +12,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { CartComponent } from './cart/cart.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProductDataService } from './product-data.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     NgbModule
   ],
-  providers: [],
+  providers: [ProductDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
