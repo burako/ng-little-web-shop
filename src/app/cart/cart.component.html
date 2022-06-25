@@ -1,9 +1,24 @@
-<h1> Shopping Cart </h1>
-<ul>
-    <li *ngFor = "let item of shoppingCart">
-        <h2>{{item.product.name}}</h2>
-        <p>{{item.product.price}}</p>
-        <p>Quantity: {{item.quantity}}</p>
-    </li>
-</ul>
-<p>Total: {{cartTotal}}</p>
+<div class="cart-container">
+    <h3 *ngIf="shoppingCart.length==0" class="empty-cart-message">Your cart is empty</h3>
+        <div class="cart-panel">
+            <div class="cart-item" *ngFor = "let item of shoppingCart">
+                    <img src="{{item.product.url}}">
+                <div class="cart-item-details">       
+                    <h3>{{item.product.name}}</h3>
+                    <p>{{item.product.price | currency: 'USD': true}}</p>
+                    <form #quantitySelector="ngForm">
+                        Quantity: <input type="number" class="number-input" name="quantity" min="0" value="{{item.quantity}}" [(ngModel)]="item.quantity" (ngModelChange)="onQuantityChange(item)" ngModel>
+                    </form>
+                </div>
+            </div>
+            <h4>Total: {{cartTotal | currency: 'USD': true}}</h4>
+        </div>
+        <div>
+            <form #paymentForm="ngForm" (ngSubmit)="checkout()" class="cart-item-details">
+                <input type="text" name="fullname" class="form-margin" placeholder="Your full name" required>
+                <input type="text" name="address" class="form-margin" placeholder="Your address" required>
+                <input type="number" name="card" class="form-margin" placeholder="Your card number" required>
+                <input type="submit" value="Make payment" class="btn btn-primary">
+            </form>
+        </div>
+</div>

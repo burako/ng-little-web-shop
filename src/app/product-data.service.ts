@@ -31,6 +31,10 @@ export class ProductDataService {
     }
   }
 
+  getNumberOfItemsInCart() : number {
+    return this.shoppingCart.length;
+  }
+
   getItemsInCart(): CartItem[] {
     return this.shoppingCart;
   }

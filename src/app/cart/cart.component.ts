@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductDataService } from '../product-data.service';
 import { CartItem } from '../models/cartItem';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-cart',
@@ -9,20 +10,26 @@ import { CartItem } from '../models/cartItem';
 })
 export class CartComponent implements OnInit {
 
-  cartView: CartItem[] = [];
   shoppingCart: CartItem[] = [];
   cartTotal: number = 0;
 
   constructor(private productService: ProductDataService) { }
 
   ngOnInit(): void {
-    this.shoppingCart = this.showCart();
+    this.shoppingCart = this.productService.getItemsInCart();
     this.cartTotal = this.totalPrice();
   }
 
-  showCart(): CartItem[] {
-    this.cartView = this.productService.getItemsInCart();
-    return this.cartView;
+  onQuantityChange(item: CartItem): void {
+    const updatedItem = this.shoppingCart.find(x => x.product.id == item.product.id);
+    if (item.quantity === 0) {
+      const index = this.shoppingCart.indexOf(updatedItem!)
+      this.shoppingCart.splice(index, 1);
+      alert(item.product.name + " is removed from cart!");
+    } else {
+      updatedItem!.quantity = item.quantity;
+    }
+    this.cartTotal = this.totalPrice();
   }
 
   totalPrice(): number {
@@ -33,5 +40,7 @@ export class CartComponent implements OnInit {
     );
     return total;
   }
+
+  checkout(): void {}
 
 }
