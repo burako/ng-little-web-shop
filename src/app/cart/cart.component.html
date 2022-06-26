@@ -13,6 +13,7 @@
                     <form #quantitySelector="ngForm">
                         Quantity: <input type="number" class="number-input" name="quantity" min="0" value="{{item.quantity}}" [(ngModel)]="item.quantity" (ngModelChange)="onQuantityChange(item)" ngModel>
                     </form>
+                    <button style="margin: 10px;" (click)="removeItem(item)">Remove</button>
                 </div>
             </div>
             <h4 *ngIf="cartTotal>0">Total: {{cartTotal | currency: 'USD': true}}</h4>

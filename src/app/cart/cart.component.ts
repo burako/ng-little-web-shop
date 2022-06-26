@@ -38,6 +38,15 @@ export class CartComponent implements OnInit {
     this.productService.setCart(this.shoppingCart);
   }
 
+  removeItem(item: CartItem): void{
+    const deletedItem = this.shoppingCart.find(x => x.product.id == item.product.id);
+    const index = this.shoppingCart.indexOf(deletedItem!)
+    this.shoppingCart.splice(index, 1);
+    alert(item.product.name + " is removed from cart!");
+    this.cartTotal = this.totalPrice();
+    this.productService.setCart(this.shoppingCart);
+  }
+
   totalPrice(): number {
     let total = 0;
     this.shoppingCart.forEach(item => {
