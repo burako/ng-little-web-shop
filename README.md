@@ -1,27 +1,26 @@
 # NgLittleWebShop
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.5.
+This project is the front-end of an online store built with Angular. It allows following actions: 
+    user can see all products on the main page
+    user can select quantity for each product on the main page
+    user is informed when products added to the cart
+    user can add items to the cart on the main page
+    user can select quantity for each product on the product detail page
+    user can add items to the cart on the product detail page
+    user can see items added to the cart in the cart page
+    user can change quantity of the each product in the cart page
+    if quantity of a product decreased to zero, it is removed from cart
+    user can see the total price for all items in the cart
+    users can enter payment information in the cart page
+    users gets a confirmation of the order in the confirmation page
+    cart is emptied after order is made
+    cart badge in the header shows number of items in the cart
 
-## Development server
+The app uses assets/data.json for product information.
+Product and cart data operations are handled in product-data.service.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Launching the app
 
-## Code scaffolding
+Run npm install for installing all dependencies
+Run `ng serve` and navigate to `http://localhost:4200/` to access the application
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
