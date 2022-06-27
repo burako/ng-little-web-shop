@@ -41,8 +41,15 @@
                     </div>
                 </div>
                 <label>*Card number</label>
-                <input type="text" name="card" class="form-margin" required minlength="16" placeholder="16 digit card number" [(ngModel)]="cardNumber" #cardno="ngModel">
-                
+                <input type="text" name="card" class="form-margin" required pattern="\d{16}" placeholder="16 digit card number" [(ngModel)]="cardNumber" #cardno="ngModel">
+                <div class="validation-message" *ngIf="cardno.invalid && cardno.dirty">
+                    <div *ngIf="cardno.errors?.['required']">
+                        Card number is required
+                    </div>
+                    <div *ngIf="cardno.errors?.['pattern']">
+                        Card number must be 16 digit numbers
+                    </div>
+                </div>
                 <input type="submit" [disabled]="paymentForm.invalid" value="Pay {{cartTotal | currency: 'USD': true}}" class="btn btn-primary form-margin">
             </form>
             
