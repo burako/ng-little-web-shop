@@ -44,3 +44,7 @@ img {
     margin-top: 64px;
   }
   
+  .validation-message{
+    color: rgb(174, 36, 36);
+    font-size:smaller;
+  }

@@ -21,13 +21,31 @@
         <div *ngIf="shoppingCart.length>0">
             <form #paymentForm="ngForm" (ngSubmit)="checkout()" class="cart-item-details">
                 <label>*Full name</label>
-                <input type="text" name="fullname" class="form-margin" required minlength="3" placeholder="Minimum 3 characters" [(ngModel)]="fullName">
+                <input type="text" name="fullname" class="form-margin" required minlength="3" placeholder="Minimum 3 characters" [(ngModel)]="fullName" #name="ngModel">
+                <div class="validation-message" *ngIf="name.invalid && name.dirty">
+                    <div *ngIf="name.errors?.['required']">
+                        Your name is required
+                    </div>
+                    <div *ngIf="name.errors?.['minlength']">
+                        Name must be min 3 characters
+                    </div>
+                </div>
                 <label>*Address</label>
-                <input type="text" name="address" class="form-margin" required minlength="6" placeholder="Minimum 6 characters" [(ngModel)]="shippingAddress">
+                <input type="text" name="address" class="form-margin" required minlength="6" placeholder="Minimum 6 characters" [(ngModel)]="shippingAddress" #address="ngModel">
+                <div class="validation-message" *ngIf="address.invalid && address.dirty">
+                    <div *ngIf="address.errors?.['required']">
+                        Your address is required
+                    </div>
+                    <div *ngIf="address.errors?.['minlength']">
+                        Address must be min 6 characters
+                    </div>
+                </div>
                 <label>*Card number</label>
-                <input type="text" name="card" class="form-margin" required minlength="16" placeholder="16 digit card number" [(ngModel)]="cardNumber">
+                <input type="text" name="card" class="form-margin" required minlength="16" placeholder="16 digit card number" [(ngModel)]="cardNumber" #cardno="ngModel">
                 
                 <input type="submit" [disabled]="paymentForm.invalid" value="Pay {{cartTotal | currency: 'USD': true}}" class="btn btn-primary form-margin">
             </form>
+            
+            
         </div>
 </div>
