@@ -1,5 +1,5 @@
 <div class="product-container">
     <div class="product-index">
-        <app-product-list-item *ngFor="let product of products" [productItem]="product"></app-product-list-item>
+        <app-product-list-item *ngFor="let product of products" [productItem]="product" (addCart)="addToCart($event)"></app-product-list-item>
     </div>
 </div>
